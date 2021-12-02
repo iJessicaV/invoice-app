@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-function InvoiceForm(props) {
+function InvoiceForm() {
 
     let navigate = useNavigate();
 
@@ -176,14 +176,13 @@ function InvoiceForm(props) {
                             <Controls.Input
                                 label="Country"
                                 name="country"
-                                style={{width: 200}}
+                                style={{width: 300}}
                                 value={formik.values.country}
                                 onChange={formik.handleChange}
                             />
                         </Stack>
                         <Stack spacing={2} direction="row">
                             <Controls.Input
-                                fullwidth
                                 label="Mobile"
                                 name="mobile"
                                 style={{width: 300}}
