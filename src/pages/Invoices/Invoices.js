@@ -33,8 +33,8 @@ const headCells = [
     { id: 'invoiceNumber', label: 'Invoice Number' },
     { id: 'dateCreated', label: 'Date Created' },
     { id: 'fullName', label: 'Full Name' },
-    { id: 'paymentDue', label: 'Amount Due' },
-    { id: 'invoiceDue', label: 'Date Due' },
+    { id: 'paymentDue', label: 'Payment Due' },
+    { id: 'invoiceDue', label: 'Invoice Due' },
     { id: 'status', label: 'Status' }
 ]
 

@@ -65,6 +65,23 @@ function InvoiceForm(props) {
         )
     }
 
+    const PaymentField = (props) => {
+
+        const { values, setFieldValue } = useFormikContext();
+        const [field] = useField(props);
+
+        React.useEffect(() => {
+
+          setFieldValue(props.name, getTotalPayment(values.columns));
+        }, [values.columns, setFieldValue, props.name]);
+      
+        return (
+          <>
+            <TextField {...props} {...field} />
+          </>
+        );
+      };
+
     return (
         <>
             <PageHeader
@@ -78,9 +95,9 @@ function InvoiceForm(props) {
                     invoiceNumber: 0,
                     fullName: '',
                     email: '',
-                    mobile: '',
                     address: '',
                     city: '',
+                    mobile: '',
                     postCode: '',
                     country: '',
                     createDate: formatDate(new Date()),
@@ -100,6 +117,7 @@ function InvoiceForm(props) {
                 validationSchema={validationSchema}
                 onSubmit={ (values) => {
                     add(values);
+                    console.log(values);
                     navigate("/Invoices");
                     
                 }}
@@ -155,17 +173,23 @@ function InvoiceForm(props) {
                                 value={formik.values.postCode}
                                 onChange={formik.handleChange}
                             />
+                            <Controls.Input
+                                label="Country"
+                                name="country"
+                                style={{width: 200}}
+                                value={formik.values.country}
+                                onChange={formik.handleChange}
+                            />
                         </Stack>
                         <Stack spacing={2} direction="row">
-                        <Controls.Input
+                            <Controls.Input
                                 fullwidth
                                 label="Mobile"
                                 name="mobile"
                                 style={{width: 300}}
                                 value={formik.values.mobile}
                                 onChange={formik.handleChange}
-                                error={formik.errors.mobile}
-                        />
+                            />
                         </Stack>
                         <Typography sx={{fontSize: 18, p: 1}} color="text.secondary">
                             Item List
@@ -260,13 +284,13 @@ function InvoiceForm(props) {
                             value={formik.values.invoiceDue}
                             onChange={formik.handleChange}
                         />
-                        <Controls.Input
+                        <PaymentField
                             name="paymentDue"
-                            label="Payment Due"
                             style={{width: 300}}
-                            value={getTotalPayment(formik.values.columns)}
+                            label="Payment Due"
                             onChange={formik.handleChange}
                             disabled
+
                         />
                     </Stack>
                     <div style={{marginTop: 20}}>
